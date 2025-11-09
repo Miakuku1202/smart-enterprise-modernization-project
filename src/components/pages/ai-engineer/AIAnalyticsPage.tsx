@@ -2,7 +2,7 @@ import { TrendingUp, Activity, Brain, Database } from "lucide-react";
 import { Badge } from "../../ui/badge";
 import { motion } from "motion/react";
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { aiEngineerData } from "../../../data/mockData";
+
 
 export function AIAnalyticsPage() {
   const modelComparison = [

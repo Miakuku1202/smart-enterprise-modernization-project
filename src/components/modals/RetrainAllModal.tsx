@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Brain, AlertTriangle, CheckCircle } from "lucide-react";
 import { useState } from "react";
 import { Progress } from "../ui/progress";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 interface RetrainAllModalProps {
   open: boolean;

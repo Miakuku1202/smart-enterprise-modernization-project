@@ -1,13 +1,18 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Checkbox } from "../ui/checkbox";
-import { RefreshCw, AlertTriangle, Loader2, CheckCircle } from "lucide-react";
-import { Badge } from "../ui/badge";
+import { RefreshCw, AlertTriangle, Loader2 } from "lucide-react";
 import { Progress } from "../ui/progress";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 interface RestartServiceModalProps {
   open: boolean;
@@ -30,12 +35,12 @@ export function RestartServiceModal({ open, onClose, service }: RestartServiceMo
     // Simulate restart progress
     const steps = [0, 25, 50, 75, 100];
     for (const step of steps) {
-      await new Promise(resolve => setTimeout(resolve, 600));
+      await new Promise((resolve) => setTimeout(resolve, 600));
       setProgress(step);
     }
 
     toast.success(`Service "${service?.name || "service"}" restarted successfully!`, {
-      description: "All health checks passed. Service is operational."
+      description: "All health checks passed. Service is operational.",
     });
 
     setRestarting(false);
@@ -84,7 +89,7 @@ export function RestartServiceModal({ open, onClose, service }: RestartServiceMo
           )}
 
           {restarting ? (
-            /* Restart Progress */
+            // Restart Progress
             <div className="space-y-4">
               <div className="p-6 bg-yellow-500/10 border border-yellow-500/30 rounded-lg text-center">
                 <Loader2 className="w-12 h-12 text-yellow-400 mx-auto mb-4 animate-spin" />
@@ -109,7 +114,8 @@ export function RestartServiceModal({ open, onClose, service }: RestartServiceMo
                   <div>
                     <h4 className="text-yellow-400 mb-1">Service Restart Warning</h4>
                     <p className="text-sm text-slate-300">
-                      Restarting this service may cause temporary downtime. Active connections will be terminated.
+                      Restarting this service may cause temporary downtime. Active
+                      connections will be terminated.
                     </p>
                   </div>
                 </div>
@@ -118,19 +124,18 @@ export function RestartServiceModal({ open, onClose, service }: RestartServiceMo
               {/* Options */}
               <div className="space-y-4 p-4 bg-slate-700/30 rounded-lg border border-slate-600">
                 <Label className="text-slate-300">Restart Options</Label>
-                
+
                 <div className="flex items-center space-x-3">
                   <Checkbox
                     id="graceful"
                     checked={gracefulShutdown}
-                    onCheckedChange={(checked) => setGracefulShutdown(checked as boolean)}
+                    onCheckedChange={(checked: boolean | "indeterminate") =>
+                      setGracefulShutdown(checked === true)
+                    }
                     className="border-slate-500"
                   />
                   <div>
-                    <label
-                      htmlFor="graceful"
-                      className="text-white cursor-pointer select-none"
-                    >
+                    <label htmlFor="graceful" className="text-white cursor-pointer select-none">
                       Graceful Shutdown
                     </label>
                     <p className="text-xs text-slate-400">
@@ -143,14 +148,13 @@ export function RestartServiceModal({ open, onClose, service }: RestartServiceMo
                   <Checkbox
                     id="cache"
                     checked={clearCache}
-                    onCheckedChange={(checked) => setClearCache(checked as boolean)}
+                    onCheckedChange={(checked: boolean | "indeterminate") =>
+                      setClearCache(checked === true)
+                    }
                     className="border-slate-500"
                   />
                   <div>
-                    <label
-                      htmlFor="cache"
-                      className="text-white cursor-pointer select-none"
-                    >
+                    <label htmlFor="cache" className="text-white cursor-pointer select-none">
                       Clear Cache
                     </label>
                     <p className="text-xs text-slate-400">
@@ -183,7 +187,10 @@ export function RestartServiceModal({ open, onClose, service }: RestartServiceMo
                   {clearCache && <li>• Application cache will be cleared</li>}
                   <li>• Service will be restarted with latest configuration</li>
                   <li>• Health checks will run automatically</li>
-                  <li>• Estimated downtime: {gracefulShutdown ? "10-30 seconds" : "5-15 seconds"}</li>
+                  <li>
+                    • Estimated downtime:{" "}
+                    {gracefulShutdown ? "10–30 seconds" : "5–15 seconds"}
+                  </li>
                 </ul>
               </div>
             </>

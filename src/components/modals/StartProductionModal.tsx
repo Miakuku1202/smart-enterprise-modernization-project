@@ -1,24 +1,43 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "../ui/select";
 
 interface StartProductionModalProps {
   open: boolean;
   onClose: () => void;
 }
 
+interface ProductionFormData {
+  productLine: string;
+  productType: string;
+  quantity: string;
+  shift: string;
+}
+
 export function StartProductionModal({ open, onClose }: StartProductionModalProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ProductionFormData>({
     productLine: "",
     productType: "",
     quantity: "",
     shift: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Starting production:", formData);
     onClose();
@@ -33,10 +52,17 @@ export function StartProductionModal({ open, onClose }: StartProductionModalProp
             Initialize a new production batch with the specified parameters.
           </DialogDescription>
         </DialogHeader>
+
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Production Line */}
           <div className="space-y-2">
             <Label htmlFor="productLine">Production Line</Label>
-            <Select value={formData.productLine} onValueChange={(value) => setFormData({ ...formData, productLine: value })}>
+            <Select
+              value={formData.productLine}
+              onValueChange={(value: string) =>
+                setFormData({ ...formData, productLine: value })
+              }
+            >
               <SelectTrigger className="bg-slate-900 border-slate-700 text-white">
                 <SelectValue placeholder="Select production line" />
               </SelectTrigger>
@@ -47,9 +73,16 @@ export function StartProductionModal({ open, onClose }: StartProductionModalProp
               </SelectContent>
             </Select>
           </div>
+
+          {/* Product Type */}
           <div className="space-y-2">
             <Label htmlFor="productType">Product Type</Label>
-            <Select value={formData.productType} onValueChange={(value) => setFormData({ ...formData, productType: value })}>
+            <Select
+              value={formData.productType}
+              onValueChange={(value: string) =>
+                setFormData({ ...formData, productType: value })
+              }
+            >
               <SelectTrigger className="bg-slate-900 border-slate-700 text-white">
                 <SelectValue placeholder="Select product type" />
               </SelectTrigger>
@@ -61,21 +94,32 @@ export function StartProductionModal({ open, onClose }: StartProductionModalProp
               </SelectContent>
             </Select>
           </div>
+
+          {/* Quantity */}
           <div className="space-y-2">
             <Label htmlFor="quantity">Target Quantity</Label>
             <Input
               id="quantity"
               type="number"
               value={formData.quantity}
-              onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, quantity: e.target.value })
+              }
               placeholder="Enter target quantity"
               className="bg-slate-900 border-slate-700 text-white"
               required
             />
           </div>
+
+          {/* Shift */}
           <div className="space-y-2">
             <Label htmlFor="shift">Shift</Label>
-            <Select value={formData.shift} onValueChange={(value) => setFormData({ ...formData, shift: value })}>
+            <Select
+              value={formData.shift}
+              onValueChange={(value: string) =>
+                setFormData({ ...formData, shift: value })
+              }
+            >
               <SelectTrigger className="bg-slate-900 border-slate-700 text-white">
                 <SelectValue placeholder="Select shift" />
               </SelectTrigger>
@@ -86,16 +130,29 @@ export function StartProductionModal({ open, onClose }: StartProductionModalProp
               </SelectContent>
             </Select>
           </div>
+
+          {/* Info Box */}
           <div className="p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
             <p className="text-sm text-slate-300">
-              Production will start immediately upon confirmation. All necessary resources will be allocated automatically.
+              Production will start immediately upon confirmation. All necessary
+              resources will be allocated automatically.
             </p>
           </div>
+
+          {/* Actions */}
           <div className="flex gap-3 pt-4">
-            <Button type="button" variant="outline" onClick={onClose} className="flex-1 border-slate-700 text-slate-300">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+              className="flex-1 border-slate-700 text-slate-300"
+            >
               Cancel
             </Button>
-            <Button type="submit" className="flex-1 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600">
+            <Button
+              type="submit"
+              className="flex-1 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600"
+            >
               Start Production
             </Button>
           </div>

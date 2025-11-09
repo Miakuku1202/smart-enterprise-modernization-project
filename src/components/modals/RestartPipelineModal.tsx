@@ -4,7 +4,7 @@ import { RefreshCw, AlertTriangle, CheckCircle, Play } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "../ui/badge";
 import { Progress } from "../ui/progress";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 interface RestartPipelineModalProps {
   open: boolean;

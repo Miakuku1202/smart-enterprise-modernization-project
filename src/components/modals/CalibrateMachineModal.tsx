@@ -6,7 +6,7 @@ import { Textarea } from "../ui/textarea";
 import { Checkbox } from "../ui/checkbox";
 import { Wrench, Settings, Loader2, CheckCircle } from "lucide-react";
 import { Progress } from "../ui/progress";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 interface CalibrateMachineModalProps {
   open: boolean;

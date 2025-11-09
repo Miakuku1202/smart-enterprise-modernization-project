@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Database, Download, Calendar } from "lucide-react";
 import { useState } from "react";
 import { Label } from "../ui/label";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 interface ExportDataModalProps {
   open: boolean;

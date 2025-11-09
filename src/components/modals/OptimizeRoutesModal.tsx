@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { Truck, MapPin, Clock, TrendingDown, Zap, CheckCircle } from "lucide-react";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 interface OptimizeRoutesModalProps {
   open: boolean;

@@ -136,26 +136,46 @@ export const aiEngineerData = {
     { name: "Demand Forecasting", accuracy: 91.8, status: "active", lastUpdated: "2025-11-03", retrain: false },
     { name: "Energy Optimizer", accuracy: 88.5, status: "active", lastUpdated: "2025-11-01", retrain: false }
   ],
+
   predictions: [
     { week: "Week 1", failures: 2, confidence: 85 },
     { week: "Week 2", failures: 1, confidence: 92 },
     { week: "Week 3", failures: 3, confidence: 78 },
     { week: "Week 4", failures: 1, confidence: 88 }
   ],
+
   demandForecast: [
     { product: "Sedan Model A", predicted: 1200, confidence: 94 },
     { product: "SUV Model B", predicted: 850, confidence: 89 },
     { product: "Electric Model C", predicted: 650, confidence: 91 },
     { product: "Truck Model D", predicted: 420, confidence: 86 }
   ],
+
   dataPipeline: [
     { stage: "Data Collection", status: "healthy", throughput: "15.2K/min" },
     { stage: "Data Processing", status: "healthy", throughput: "12.8K/min" },
     { stage: "Feature Engineering", status: "warning", throughput: "8.5K/min" },
     { stage: "Model Training", status: "healthy", throughput: "2.1K/min" },
     { stage: "Inference", status: "healthy", throughput: "18.9K/min" }
+  ],
+
+  // ✅ Add this new section below — required for the performance chart
+  modelPerformance: [
+    { month: "Jan", accuracy: 88, precision: 82, recall: 80 },
+    { month: "Feb", accuracy: 90, precision: 85, recall: 83 },
+    { month: "Mar", accuracy: 91, precision: 86, recall: 85 },
+    { month: "Apr", accuracy: 92, precision: 87, recall: 86 },
+    { month: "May", accuracy: 93, precision: 89, recall: 88 },
+    { month: "Jun", accuracy: 94, precision: 90, recall: 89 },
+    { month: "Jul", accuracy: 95, precision: 91, recall: 90 },
+    { month: "Aug", accuracy: 94, precision: 90, recall: 89 },
+    { month: "Sep", accuracy: 96, precision: 92, recall: 91 },
+    { month: "Oct", accuracy: 95, precision: 91, recall: 90 },
+    { month: "Nov", accuracy: 97, precision: 93, recall: 92 },
+    { month: "Dec", accuracy: 98, precision: 94, recall: 93 }
   ]
 };
+
 
 export const partnerSupplierData = {
   orders: [

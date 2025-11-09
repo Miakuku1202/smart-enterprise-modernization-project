@@ -1,9 +1,21 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "../ui/select";
 import { Textarea } from "../ui/textarea";
 
 interface ScheduleMaintenanceModalProps {
@@ -11,8 +23,19 @@ interface ScheduleMaintenanceModalProps {
   onClose: () => void;
 }
 
-export function ScheduleMaintenanceModal({ open, onClose }: ScheduleMaintenanceModalProps) {
-  const [formData, setFormData] = useState({
+interface MaintenanceFormData {
+  machine: string;
+  type: string;
+  date: string;
+  time: string;
+  notes: string;
+}
+
+export function ScheduleMaintenanceModal({
+  open,
+  onClose
+}: ScheduleMaintenanceModalProps) {
+  const [formData, setFormData] = useState<MaintenanceFormData>({
     machine: "",
     type: "",
     date: "",
@@ -20,7 +43,7 @@ export function ScheduleMaintenanceModal({ open, onClose }: ScheduleMaintenanceM
     notes: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Scheduling maintenance:", formData);
     onClose();
@@ -35,10 +58,17 @@ export function ScheduleMaintenanceModal({ open, onClose }: ScheduleMaintenanceM
             Schedule maintenance for factory equipment.
           </DialogDescription>
         </DialogHeader>
+
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Machine Selection */}
           <div className="space-y-2">
             <Label htmlFor="machine">Select Machine</Label>
-            <Select value={formData.machine} onValueChange={(value) => setFormData({ ...formData, machine: value })}>
+            <Select
+              value={formData.machine}
+              onValueChange={(value: string) =>
+                setFormData({ ...formData, machine: value })
+              }
+            >
               <SelectTrigger className="bg-slate-900 border-slate-700 text-white">
                 <SelectValue placeholder="Choose machine" />
               </SelectTrigger>
@@ -52,9 +82,16 @@ export function ScheduleMaintenanceModal({ open, onClose }: ScheduleMaintenanceM
               </SelectContent>
             </Select>
           </div>
+
+          {/* Maintenance Type */}
           <div className="space-y-2">
             <Label htmlFor="type">Maintenance Type</Label>
-            <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
+            <Select
+              value={formData.type}
+              onValueChange={(value: string) =>
+                setFormData({ ...formData, type: value })
+              }
+            >
               <SelectTrigger className="bg-slate-900 border-slate-700 text-white">
                 <SelectValue placeholder="Select type" />
               </SelectTrigger>
@@ -66,6 +103,8 @@ export function ScheduleMaintenanceModal({ open, onClose }: ScheduleMaintenanceM
               </SelectContent>
             </Select>
           </div>
+
+          {/* Date and Time */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="date">Date</Label>
@@ -73,7 +112,9 @@ export function ScheduleMaintenanceModal({ open, onClose }: ScheduleMaintenanceM
                 id="date"
                 type="date"
                 value={formData.date}
-                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, date: e.target.value })
+                }
                 className="bg-slate-900 border-slate-700 text-white"
                 required
               />
@@ -84,27 +125,43 @@ export function ScheduleMaintenanceModal({ open, onClose }: ScheduleMaintenanceM
                 id="time"
                 type="time"
                 value={formData.time}
-                onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, time: e.target.value })
+                }
                 className="bg-slate-900 border-slate-700 text-white"
                 required
               />
             </div>
           </div>
+
+          {/* Notes */}
           <div className="space-y-2">
             <Label htmlFor="notes">Notes</Label>
             <Textarea
               id="notes"
               value={formData.notes}
-              onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, notes: e.target.value })
+              }
               placeholder="Additional notes or instructions"
               className="bg-slate-900 border-slate-700 text-white min-h-[80px]"
             />
           </div>
+
+          {/* Actions */}
           <div className="flex gap-3 pt-4">
-            <Button type="button" variant="outline" onClick={onClose} className="flex-1 border-slate-700 text-slate-300">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+              className="flex-1 border-slate-700 text-slate-300"
+            >
               Cancel
             </Button>
-            <Button type="submit" className="flex-1 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600">
+            <Button
+              type="submit"
+              className="flex-1 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600"
+            >
               Schedule
             </Button>
           </div>

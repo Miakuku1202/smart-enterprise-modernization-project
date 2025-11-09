@@ -1,10 +1,22 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 interface NewTicketModalProps {
   open: boolean;
@@ -16,7 +28,7 @@ export function NewTicketModal({ open, onClose }: NewTicketModalProps) {
     customer: "",
     issue: "",
     priority: "",
-    description: ""
+    description: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -34,21 +46,32 @@ export function NewTicketModal({ open, onClose }: NewTicketModalProps) {
             Fill in the details to create a new customer support ticket.
           </DialogDescription>
         </DialogHeader>
+
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Customer Name */}
           <div className="space-y-2">
             <Label htmlFor="customer">Customer Name</Label>
             <Input
               id="customer"
               value={formData.customer}
-              onChange={(e) => setFormData({ ...formData, customer: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setFormData({ ...formData, customer: e.target.value })
+              }
               placeholder="Enter customer name"
               className="bg-slate-900 border-slate-700 text-white"
               required
             />
           </div>
+
+          {/* Issue Type */}
           <div className="space-y-2">
             <Label htmlFor="issue">Issue Type</Label>
-            <Select value={formData.issue} onValueChange={(value) => setFormData({ ...formData, issue: value })}>
+            <Select
+              value={formData.issue}
+              onValueChange={(value: string) =>
+                setFormData({ ...formData, issue: value })
+              }
+            >
               <SelectTrigger className="bg-slate-900 border-slate-700 text-white">
                 <SelectValue placeholder="Select issue type" />
               </SelectTrigger>
@@ -62,9 +85,16 @@ export function NewTicketModal({ open, onClose }: NewTicketModalProps) {
               </SelectContent>
             </Select>
           </div>
+
+          {/* Priority */}
           <div className="space-y-2">
             <Label htmlFor="priority">Priority</Label>
-            <Select value={formData.priority} onValueChange={(value) => setFormData({ ...formData, priority: value })}>
+            <Select
+              value={formData.priority}
+              onValueChange={(value: string) =>
+                setFormData({ ...formData, priority: value })
+              }
+            >
               <SelectTrigger className="bg-slate-900 border-slate-700 text-white">
                 <SelectValue placeholder="Select priority" />
               </SelectTrigger>
@@ -75,22 +105,36 @@ export function NewTicketModal({ open, onClose }: NewTicketModalProps) {
               </SelectContent>
             </Select>
           </div>
+
+          {/* Description */}
           <div className="space-y-2">
             <Label htmlFor="description">Description</Label>
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
               placeholder="Describe the issue in detail"
               className="bg-slate-900 border-slate-700 text-white min-h-[100px]"
               required
             />
           </div>
+
+          {/* Buttons */}
           <div className="flex gap-3 pt-4">
-            <Button type="button" variant="outline" onClick={onClose} className="flex-1 border-slate-700 text-slate-300">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+              className="flex-1 border-slate-700 text-slate-300"
+            >
               Cancel
             </Button>
-            <Button type="submit" className="flex-1 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600">
+            <Button
+              type="submit"
+              className="flex-1 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600"
+            >
               Create Ticket
             </Button>
           </div>

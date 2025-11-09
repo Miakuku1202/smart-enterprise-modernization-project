@@ -59,7 +59,11 @@ export function AddCustomerModal({ open, onClose }: AddCustomerModalProps) {
           </div>
           <div className="space-y-2">
             <Label htmlFor="type">Customer Type</Label>
-            <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
+            <Select
+  value={formData.type}
+  onValueChange={(value: string) => setFormData({ ...formData, type: value })}
+>
+
               <SelectTrigger className="bg-slate-900 border-slate-700 text-white">
                 <SelectValue placeholder="Select type" />
               </SelectTrigger>

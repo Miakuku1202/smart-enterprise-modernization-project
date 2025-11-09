@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Mail, Phone, MapPin, Printer, Home } from 'lucide-react'; // Import Home icon
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Link } from 'react-router-dom';
-
+import React from 'react';
 export function ContactsPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
