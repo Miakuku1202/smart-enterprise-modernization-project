@@ -7,7 +7,8 @@ import { Zap, Mail, Lock, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { users } from "../../data/mockData";
 import { motion } from "motion/react";
-
+import React from 'react';
+import Logo from '../../public/Logo.png';
 interface LoginPageProps {
   onLogin: (email: string, role: string) => void;
 }
@@ -74,9 +75,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
             </Link>
             
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-teal-400 to-blue-500 rounded-xl flex items-center justify-center">
-                <Zap className="w-8 h-8 text-white" />
-              </div>
+              <img src={Logo} alt="Smart Enterprise Logo" className="h-16 w-16" />
               <div>
                 <h1 className="text-3xl text-white">Smart Enterprise</h1>
                 <p className="text-slate-400">Automotive Digital Transformation</p>

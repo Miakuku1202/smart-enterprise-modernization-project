@@ -7,6 +7,8 @@ import { Zap, Mail, Lock, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { Github } from "lucide-react"; // Import Github icon
+import React from 'react'; 
+import Logo from '../../public/Logo.png';
 
 export function SignupPage() {
   const [email, setEmail] = useState("");
@@ -56,9 +58,7 @@ export function SignupPage() {
             </Link>
             
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-teal-400 to-blue-500 rounded-xl flex items-center justify-center">
-                <Zap className="w-8 h-8 text-white" />
-              </div>
+              <img src={Logo} alt="Smart Enterprise Logo" className="h-16 w-16" />
               <div>
                 <h1 className="text-3xl text-white">Smart Enterprise</h1>
                 <p className="text-slate-400">Automotive Digital Transformation</p>
