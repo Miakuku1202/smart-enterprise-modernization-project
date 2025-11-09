@@ -14,7 +14,7 @@ import {
   Shield
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import Logo from '../../public/logo.png';
+import Logo from '../../public/Logo.png';
 interface SidebarProps {
   role: string;
   onLogout: () => void;
@@ -75,7 +75,7 @@ export function Sidebar({ role, onLogout }: SidebarProps) {
       {/* Logo */}
       <div className="p-6 border-b border-slate-700">
         <Link to="/" className="flex items-center gap-2">
-          <img src={Logo} alt="Smart Enterprise Logo" className="w-10 h-10" />
+          <img src={} alt="Smart Enterprise Logo" className="w-10 h-10" />
           <div>
             <h1 className="text-white">Smart Enterprise</h1>
             <p className="text-xs text-slate-400">Automotive Digital</p>
