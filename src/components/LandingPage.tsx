@@ -1,10 +1,21 @@
-import React from 'react';
-import { ArrowRight, Zap, Cloud, Brain, Leaf, Shield, Code, ChevronRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ArrowRight, Zap, Cloud, Brain, Leaf, Shield, Code, ChevronRight, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-import { motion } from "motion/react";
-import Logo from "../public/Logo.png"
+import { motion, AnimatePresence } from "framer-motion";
+import Logo from "../public/Logo.png";
 export function LandingPage() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Close mobile menu on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) setMenuOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const features = [
     {
       icon: Zap,
@@ -66,17 +77,27 @@ export function LandingPage() {
       {/* Header */}
       <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          {/* Logo */}
           <div className="flex items-center gap-2">
             <img src={Logo} alt="Smart Enterprise Logo" className="h-12 w-12" />
             <div>
-              <h1 className="text-white">Smart Enterprise</h1>
+              <h1 className="text-white font-semibold">Smart Enterprise</h1>
               <p className="text-xs text-slate-400">Automotive Digital Transformation</p>
             </div>
           </div>
-          <nav className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-slate-300 hover:text-white transition-colors">Features</a>
-            <a href="#how-it-works" className="text-slate-300 hover:text-white transition-colors">How It Works</a>
-            <Link to="/contacts" className="text-slate-300 hover:text-white transition-colors">Contacts</Link>
+
+          {/* Desktop Nav (visible on ≥768px) */}
+          <nav className="hidden md:flex items-center gap-4">
+            <a href="#features" className="text-slate-300 hover:text-white transition-colors">
+              Features
+            </a>
+            <a href="#how-it-works" className="text-slate-300 hover:text-white transition-colors">
+              How It Works
+            </a>
+            <Link to="/contacts" className="text-slate-300 hover:text-white transition-colors">
+              Contacts
+            </Link>
+            <span className="text-slate-600">|</span>
             <Link to="/login">
               <Button className="bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white">
                 Login
@@ -88,7 +109,60 @@ export function LandingPage() {
               </Button>
             </Link>
           </nav>
+
+          {/* Mobile Toggle Button (visible only on <768px) */}
+          <button
+            className="md:hidden text-slate-300 hover:text-white focus:outline-none"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Menu (visible only when menuOpen is true) */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden bg-slate-900 border-t border-slate-800 px-6 py-4 flex flex-col gap-3"
+            >
+              <a
+                href="#features"
+                onClick={() => setMenuOpen(false)}
+                className="text-slate-300 hover:text-white"
+              >
+                Features
+              </a>
+              <a
+                href="#how-it-works"
+                onClick={() => setMenuOpen(false)}
+                className="text-slate-300 hover:text-white"
+              >
+                How It Works
+              </a>
+              <Link
+                to="/contacts"
+                onClick={() => setMenuOpen(false)}
+                className="text-slate-300 hover:text-white"
+              >
+                Contacts
+              </Link>
+              <Link to="/login" onClick={() => setMenuOpen(false)}>
+                <Button className="w-full mt-2 bg-gradient-to-r from-teal-500 to-blue-500 text-white">
+                  Login
+                </Button>
+              </Link>
+              <Link to="/signup" onClick={() => setMenuOpen(false)}>
+                <Button className="w-full mt-2 bg-gradient-to-r from-teal-500 to-blue-500 text-white">
+                  Sign Up
+                </Button>
+              </Link>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Hero Section */}
@@ -98,7 +172,7 @@ export function LandingPage() {
           <div className="absolute top-20 left-20 w-72 h-72 bg-teal-500/20 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-6 py-24 relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -109,17 +183,17 @@ export function LandingPage() {
             <div className="inline-block px-4 py-2 bg-teal-500/10 border border-teal-500/30 rounded-full mb-6">
               <span className="text-teal-400 text-sm">Next-Gen Enterprise Platform</span>
             </div>
-            
+
             <h1 className="text-5xl md:text-7xl text-white mb-6 bg-gradient-to-r from-white via-teal-200 to-blue-200 bg-clip-text text-transparent">
               Smart Enterprise Modernization
             </h1>
-            
+
             <p className="text-xl md:text-2xl text-slate-300 mb-12 leading-relaxed">
               Transforming Automotive Digitally
             </p>
-            
+
             <p className="text-lg text-slate-400 mb-12 max-w-3xl mx-auto">
-              Modernize your legacy automotive systems through API-first, cloud-ready, AI-powered, 
+              Modernize your legacy automotive systems through API-first, cloud-ready, AI-powered,
               and sustainable digital transformation. Zero downtime. Maximum efficiency.
             </p>
 
@@ -130,7 +204,7 @@ export function LandingPage() {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Link to="/login">
+              <Link to="/signup">
                 <Button size="lg" variant="outline" className="border-slate-600 text-white hover:bg-slate-800">
                   Get Started
                   <ChevronRight className="ml-2 w-5 h-5" />
@@ -160,9 +234,8 @@ export function LandingPage() {
           </motion.div>
         </div>
       </section>
-
       {/* Features Section */}
-      <section id="features" className="py-24 bg-slate-900/50">
+      <section id="features" className="py-16 bg-slate-900/50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl text-white mb-4">Key Features</h2>
